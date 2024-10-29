@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'model.dart';
 import 'viewmodeluserlogin.dart';
 
+String accesstoken = "";
 class UserLogin extends StatefulWidget {
   const UserLogin({super.key});
 
@@ -66,6 +67,7 @@ class _UserLoginState extends State<UserLogin> {
                   return Text('Error: ${snapshot.error}');
                 } else if (snapshot.hasData) {
                   final user = snapshot.data!;
+                  accesstoken = user.accessToken;
                   return Column(
                     children: [
                       Text('Welcome, ${user.firstName} ${user.lastName}'),

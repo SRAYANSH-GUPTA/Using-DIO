@@ -14,6 +14,9 @@ class _RefreshtokenState extends State<Refreshtoken> {
       appBar: AppBar(
         title: const Text("Refresh Token"),
       ),
+      body: Center( // Add a body to the Scaffold
+        child: const Text("Your refresh token functionality goes here."),
+      ),
     );
   }
 }

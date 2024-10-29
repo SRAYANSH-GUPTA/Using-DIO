@@ -35,7 +35,7 @@ class _MainPageState extends State<MainPage> {
 
   final List<Widget> _pages = [
     const UserLogin(),
-    const Authuser(),
+    const AuthUser(),
     const Refreshtoken(),
   ];
 
