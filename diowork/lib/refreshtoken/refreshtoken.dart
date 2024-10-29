@@ -4,47 +4,39 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'model.dart';
 
-final String refreshToken = refreshtoken;
-
 class TokenView extends StatelessWidget {
-  final String refreshToken = accesstoken;
+  final String refreshToken;
 
-  
+  TokenView({required this.refreshToken});  
 
   Future<TokenResponse?> fetchToken() async {
     final dio = Dio();
 
-    if(!refreshtoken.isEmpty)
-    {
+    if (refreshtoken.isNotEmpty) { // Check that refreshToken is not empty
       try {
-      final response = await dio.post(
-        'https://dummyjson.com/auth/refresh',
-        options: Options(contentType: Headers.jsonContentType),
-        data: jsonEncode({
-          'refreshToken': refreshToken,
-          
-          'expiresInMins': 30,
-        }),
-      );
+        final response = await dio.post(
+          'https://dummyjson.com/auth/refresh',
+          options: Options(contentType: Headers.jsonContentType),
+          data: jsonEncode({
+            'refreshToken': refreshtoken,
+            'expiresInMins': 30,
+          }),
+        );
 
-      if (response.statusCode == 200) {
-        print('response');
-        return TokenResponse.fromJson(response.data);
-      } else {
-        throw Exception('Failed to refresh token');
+        if (response.statusCode == 200) {
+          print('Token response received');
+          return TokenResponse.fromJson(response.data);
+        } else {
+          throw Exception('Failed to refresh token');
+        }
+      } catch (e) {
+        print('Error: $e');
+        return null;
       }
-    }
-    catch (e) {
-      print(e);
+    } else {
+      print("Refresh token is empty###############################################");
       return null;
     }
-    }
-    else
-    {
-      print("####################################");
-      
-    }
-     
   }
 
   @override

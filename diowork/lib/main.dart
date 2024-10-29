@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
   final List<Widget> _pages = [
     const UserLogin(),
     const AuthUser(),
-    TokenView(),
+    TokenView(refreshToken: refreshtoken),
   ];
 
   @override
