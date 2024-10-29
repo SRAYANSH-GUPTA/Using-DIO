@@ -3,6 +3,9 @@ import 'model.dart';
 import 'viewmodeluserlogin.dart';
 
 String accesstoken = "";
+String refreshtoken = "";
+String username = "";
+String password = "";
 class UserLogin extends StatefulWidget {
   const UserLogin({super.key});
 
@@ -13,7 +16,7 @@ class UserLogin extends StatefulWidget {
 class _UserLoginState extends State<UserLogin> {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
+  
   Future<User>? userFuture;
 
   void _login() {
@@ -68,6 +71,9 @@ class _UserLoginState extends State<UserLogin> {
                 } else if (snapshot.hasData) {
                   final user = snapshot.data!;
                   accesstoken = user.accessToken;
+                  username = usernameController.text;
+                  password = passwordController.text;
+                  refreshtoken = user.refreshToken;
                   return Column(
                     children: [
                       Text('Welcome, ${user.firstName} ${user.lastName}'),
